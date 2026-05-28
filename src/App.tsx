@@ -36,11 +36,11 @@ function App() {
     }, [selectedAddress]);
 
     return (
-        <div className="flex flex-col items-center min-h-screen bg-blue-300 w-500">
+        <div className="flex flex-col items-center min-h-screen bg-blue-300">
             <AddressSearchBox onAddressSelect={setSelectedAddress} />
             {selectedAddress && (
-                <div className="flex gap-2">
-                    <div className="flex flex-col gap-2 w-115">
+                <div className="flex flex-col justify-center lg:flex-row w-full max-w-5xl gap-2">
+                    <div className="flex flex-col gap-2 w-full lg:w-1/2">
                         <CurrentCard weatherData={currentWeather} location={selectedAddress} />
                         <WeeklyCard weatherData={dailyWeather} />
                     </div>
