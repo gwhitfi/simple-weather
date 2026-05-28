@@ -1,6 +1,7 @@
 export async function location(address: string) {
-    const apiKey = `${import.meta.env.VITE_GOOGLE_API_KEY}`;
-    const url = `https://geocode.googleapis.com/v4/geocode/address/${address}?key=${apiKey}`;
+    const url = import.meta.env.DEV
+        ? `https://geocode.googleapis.com/v4/geocode/address/${address}?key=${import.meta.env.VITE_GOOGLE_API_KEY}`
+        : `/.netlify/functions/geocode?address=${encodeURIComponent(address)}`;
     const response = await fetch(`${url}`);
     const data = await response.json();
     console.log("GOOGLE GEOCODE API CALL");
