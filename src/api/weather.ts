@@ -47,7 +47,9 @@ export async function getHourlyWeather(addressData: any, timeZone: string) {
                 "precipitation_probability",
                 "weather_code",
                 "is_day",
-                "precipitation_probability",
+                "uv_index",
+                "wind_speed_10m",
+                "wind_direction_10m",
             ],
         ].join(","),
     });

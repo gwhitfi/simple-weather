@@ -1,11 +1,12 @@
 import "./index.css";
-import WeeklyCard from "./components/WeeklyCard";
+import WeeklyCard from "./components/ForecastCards/WeeklyCard";
 import AddressSearchBox from "./components/AddressSearchBox";
 import { useEffect, useState } from "react";
-import CurrentCard from "./components/CurrentCard";
+import CurrentCard from "./components/ForecastCards/CurrentCard";
 import { getCurrentWeather, getHourlyWeather, getDailyWeather } from "./api/weather";
-import HourlyCard from "./components/HourlyCard";
+import HourlyCard from "./components/ForecastCards/HourlyCard";
 import { getTimezone } from "./api/timezone";
+import SetDefault from "./components/SetDefault";
 
 function App() {
     const [selectedAddress, setSelectedAddress] = useState<any>();
@@ -13,6 +14,24 @@ function App() {
     const [hourlyWeather, setHourlyWeather] = useState(null);
     const [dailyWeather, setDailyWeather] = useState(null);
     const [searchTimeZone, setSearchTimeZone] = useState<string>("");
+    const [isDefault, setIsDefault] = useState(() => {
+        return localStorage.getItem("default_address") !== null;
+    });
+
+    useEffect(() => {
+        const savedAddress = localStorage.getItem("default_address");
+        if (savedAddress) {
+            setSelectedAddress(JSON.parse(savedAddress));
+        }
+    }, []);
+
+    useEffect(() => {
+        if (isDefault && selectedAddress) {
+            localStorage.setItem("default_address", JSON.stringify(selectedAddress));
+        } else if (!isDefault) {
+            localStorage.removeItem("default_address");
+        }
+    });
 
     useEffect(() => {
         async function fetchWeather() {
@@ -36,12 +55,19 @@ function App() {
     }, [selectedAddress]);
 
     return (
-        <div className="flex flex-col items-center min-h-screen bg-blue-300">
+        <div className="flex flex-col items-center min-h-screen bg-blue-300 p-5">
+            <h1>weather made simple.</h1>
             <AddressSearchBox onAddressSelect={setSelectedAddress} />
-            {selectedAddress && (
-                <div className="flex flex-col justify-center lg:flex-row w-full max-w-5xl gap-2">
-                    <div className="flex flex-col gap-2 w-full lg:w-1/2">
-                        <CurrentCard weatherData={currentWeather} location={selectedAddress} />
+            <SetDefault isDefault={isDefault} onCheck={setIsDefault} />
+            {selectedAddress && currentWeather && dailyWeather && hourlyWeather && (
+                <div className="">
+                    <div className="">
+                        <CurrentCard
+                            weatherData={currentWeather}
+                            hourlyWeather={hourlyWeather}
+                            timezone={searchTimeZone}
+                            location={selectedAddress}
+                        />
                         <WeeklyCard weatherData={dailyWeather} />
                     </div>
                     <HourlyCard weatherData={hourlyWeather} timezone={searchTimeZone} />

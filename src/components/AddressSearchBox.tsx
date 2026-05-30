@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { location } from "../api/geocoding";
+import { Search } from "lucide-react";
 
 function AddressSearchBox({ onAddressSelect }: any) {
     const [input, setInput] = useState("");
@@ -10,6 +11,8 @@ function AddressSearchBox({ onAddressSelect }: any) {
             if (input) {
                 const response = (await location(input)) as any;
                 setDebouncedInput(response.results);
+            } else {
+                setDebouncedInput([]);
             }
         }, 500);
 
@@ -17,29 +20,42 @@ function AddressSearchBox({ onAddressSelect }: any) {
     }, [input]);
 
     return (
-        <div className="flex flex-col w-1/2 my-15 border border-blue-400">
-            <input
-                name="search"
-                placeholder="Search for your address"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                className="bg-indigo-300 w-full h-10 outline-none"
-            ></input>
-            {debouncedInput?.map((result, index) => {
-                return (
-                    <div
-                        className="flex items-center cursor-pointer bg-indigo-300 w-full h-8 hover:bg-indigo-300"
-                        key={index}
-                        onClick={() => {
-                            onAddressSelect(result);
-                            setDebouncedInput([]);
-                            setInput("");
-                        }}
-                    >
-                        {result.formattedAddress}
-                    </div>
-                );
-            })}
+        <div className="flex flex-col w-full my-5 md:w-3/4 lg:w-1/2">
+            <div className="flex items-center bg-blue-200 text-xl px-5">
+                <input
+                    name="search"
+                    placeholder="Search for your address"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    className="w-full h-10 outline-none"
+                    autoComplete="off"
+                    onBlur={() => setDebouncedInput([])}
+                    onFocus={async () => {
+                        if (input) {
+                            const response = (await location(input)) as any;
+                            setDebouncedInput(response.results);
+                        }
+                    }}
+                ></input>
+                <Search />
+            </div>
+            <div className="border border-black rounded-b-xl px-5 text-lg overflow-hidden">
+                {debouncedInput?.map((result, index) => {
+                    return (
+                        <div
+                            className="-mx-5 px-5 py-2 truncate whitespace-nowrap hover:bg-blue-400 hover:cursor-pointer hover:font-bold"
+                            key={index}
+                            onMouseDown={() => {
+                                onAddressSelect(result);
+                                setDebouncedInput([]);
+                                setInput("");
+                            }}
+                        >
+                            {result.formattedAddress}
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 }
