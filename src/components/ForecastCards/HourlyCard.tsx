@@ -24,7 +24,7 @@ function HourlyCard({ weatherData, timezone }: any) {
         });
     const units = weatherData?.hourly_units;
     return (
-        <div className="flex flex-col bg-blue-200 rounded-2xl p-2 ">
+        <div className="flex flex-col bg-blue-200 rounded-2xl p-2 max-w-sm">
             <p className="text-3xl text-center">Hourly</p>
             {hourly.slice(0, displayHours).map((hour: any, index: any) => {
                 const temp = `${Math.round(hour.temperature_2m)}${units.temperature_2m}`;

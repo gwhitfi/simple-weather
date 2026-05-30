@@ -7,7 +7,7 @@ function WeeklyInfoCard({ max_temp, min_temp, precipitation, time, icon }: any) 
         <div className="flex flex-col bg-sky-800 text-white rounded-3xl items-center p-3 w-28">
             <div className="">{formatDate(time).split(",")[0]}</div>
             <div className=" ">{formatDate(time).split(",")[1]}</div>
-            <img src={getIcon(icon)} alt="" className="w-12 h-12 bg-sky-400 rounded-3xl" />
+            <img src={getIcon(icon)} alt="" className="w-12 h-12 bg-sky-600 rounded-3xl" />
             <div className="flex flex-col justify-center items-center">
                 <div className="flex">
                     <span className={`${getTempColor(parseFloat(min_temp))}`}>

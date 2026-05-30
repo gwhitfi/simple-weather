@@ -2,23 +2,11 @@ import { CloudRain, Sun, Wind } from "lucide-react";
 import { formatTime } from "../../utils/formatTime";
 import { getIcon } from "../../utils/getIcon";
 import { getWeatherDescription } from "../../utils/getWeatherDescription";
+import { getTempColor } from "../../utils/getTempColor";
 
 function HourlyInfoCard({ icon, temp, condition, time, day, precipitation, uv, wind }: any) {
     const tempValue = parseFloat(temp);
     const uvValue = parseFloat(uv);
-
-    let tempColor = "text-red-500";
-    if (tempValue <= 50) {
-        tempColor = "text-blue-500";
-    } else if (tempValue <= 65) {
-        tempColor = "text-cyan-500";
-    } else if (tempValue <= 75) {
-        tempColor = "text-emerald-500";
-    } else if (tempValue <= 85) {
-        tempColor = "text-amber-500";
-    } else if (tempValue <= 95) {
-        tempColor = "text-orange-500";
-    }
 
     let uvColor = "text-violet-900";
     if (uvValue <= 8) {
@@ -44,13 +32,13 @@ function HourlyInfoCard({ icon, temp, condition, time, day, precipitation, uv, w
                     <img
                         src={getIcon(icon)}
                         alt="weather forecast icon"
-                        className="w-14 h-14 bg-sky-500 rounded-full"
+                        className="w-14 h-14 bg-sky-600 rounded-full"
                     />
                     <div className="absolute bottom-full left-1/2 -translate-x-1/2 bg-black text-white text-xs rounded px-2 py-1 hidden group-hover:block whitespace-nowrap">
                         {getWeatherDescription(condition, day).description}
                     </div>
 
-                    <div className={`text-3xl ${tempColor}`}>{temp}</div>
+                    <div className={`text-3xl ${getTempColor(parseFloat(temp))}`}>{temp}</div>
                 </div>
 
                 <div className="flex items-center justify-end gap-1 w-full text-2xl">

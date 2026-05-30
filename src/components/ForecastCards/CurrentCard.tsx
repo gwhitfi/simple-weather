@@ -27,7 +27,7 @@ function CurrentCard({ weatherData, hourlyWeather, timezone, location }: any) {
                                     cur?.is_day,
                                 ).icon,
                             )}
-                            className="w-36 h-36 sm:w-42 sm:h-42 bg-sky-800 rounded-full"
+                            className="w-36 h-36 sm:w-42 sm:h-42 bg-sky-600 rounded-full"
                         />
                         <div className="text-7xl sm:text-8xl">
                             {Math.round(cur?.temperature_2m)}

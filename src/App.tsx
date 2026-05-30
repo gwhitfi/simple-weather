@@ -60,8 +60,8 @@ function App() {
             <AddressSearchBox onAddressSelect={setSelectedAddress} />
             <SetDefault isDefault={isDefault} onCheck={setIsDefault} />
             {selectedAddress && currentWeather && dailyWeather && hourlyWeather && (
-                <div className="">
-                    <div className="">
+                <div className="sm:flex sm:gap-5 sm:items-start">
+                    <div className="sm:flex sm:flex-col sm:gap-5 ">
                         <CurrentCard
                             weatherData={currentWeather}
                             hourlyWeather={hourlyWeather}
