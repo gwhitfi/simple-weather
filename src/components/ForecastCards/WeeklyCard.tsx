@@ -14,7 +14,7 @@ function WeeklyCard({ weatherData }: any) {
     }));
     const units = weatherData?.daily_units;
     return (
-        <div className="flex flex-col bg-blue-200 rounded-2xl max-w-sm pb-3 md:mt-0 mt-3">
+        <div className="flex flex-col bg-blue-200 rounded-2xl max-w-sm pb-3 md:mt-0 mt-3 p-2">
             <div className="">
                 <p className="text-3xl text-center">Weekly</p>
                 <div className="flex flex-wrap gap-2 justify-center">
