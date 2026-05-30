@@ -3,21 +3,9 @@ import { formatTime } from "../../utils/formatTime";
 import { getIcon } from "../../utils/getIcon";
 import { getWeatherDescription } from "../../utils/getWeatherDescription";
 import { getTempColor } from "../../utils/getTempColor";
+import { getUVColor } from "../../utils/getUVColor";
 
 function HourlyInfoCard({ icon, temp, condition, time, day, precipitation, uv, wind }: any) {
-    const tempValue = parseFloat(temp);
-    const uvValue = parseFloat(uv);
-
-    let uvColor = "text-violet-900";
-    if (uvValue <= 8) {
-        uvColor = "text-orange-400";
-    }
-    if (uvValue <= 5) {
-        uvColor = "text-yellow-400";
-    }
-    if (uvValue <= 3) {
-        uvColor = "text-emerald-400";
-    }
     return (
         <div className="flex flex-col bg-sky-800 text-white mb-2 rounded-3xl ">
             <div className="relative group">
@@ -61,7 +49,7 @@ function HourlyInfoCard({ icon, temp, condition, time, day, precipitation, uv, w
                     </div>
 
                     <div className="relative group">
-                        <div className={`flex gap-1 ${uvColor}`}>
+                        <div className={`flex gap-1 ${getUVColor(parseFloat(uv))}`}>
                             <Sun /> {uv}
                         </div>
                         <div className="absolute bottom-full left-1/2 -translate-x-1/2 bg-black text-white text-xs rounded px-2 py-1 hidden group-hover:block whitespace-nowrap">
