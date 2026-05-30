@@ -24,7 +24,7 @@ function HourlyCard({ weatherData, timezone }: any) {
         });
     const units = weatherData?.hourly_units;
     return (
-        <div className="flex flex-col bg-blue-200 rounded-2xl p-2 max-w-sm">
+        <div className="flex flex-col bg-blue-200 rounded-2xl p-2 max-w-sm mt-3 md:mt-0">
             <p className="text-3xl text-center">Hourly</p>
             {hourly.slice(0, displayHours).map((hour: any, index: any) => {
                 const temp = `${Math.round(hour.temperature_2m)}${units.temperature_2m}`;
@@ -44,7 +44,7 @@ function HourlyCard({ weatherData, timezone }: any) {
                     />
                 );
             })}
-            <div className="flex justify-center gap-3">
+            <div className="flex justify-center gap-3 my-3">
                 <button
                     className="bg-sky-100 border border-gray-400 rounded-xl p-1 hover:bg-sky-200"
                     onClick={() => setDisplayHours(displayHours + 6)}

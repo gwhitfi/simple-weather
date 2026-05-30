@@ -15,8 +15,8 @@ function HourlyInfoCard({ icon, temp, condition, time, day, precipitation, uv, w
                 </div>
             </div>
 
-            <div className="flex mx-2 text-md ">
-                <div className="flex items-center gap-1 relative group">
+            <div className="flex mx-2 text-md w-full">
+                <div className="flex items-center gap-1 relative group flex-shrink-0">
                     <img
                         src={getIcon(icon)}
                         alt="weather forecast icon"
@@ -29,7 +29,7 @@ function HourlyInfoCard({ icon, temp, condition, time, day, precipitation, uv, w
                     <div className={`text-3xl ${getTempColor(parseFloat(temp))}`}>{temp}</div>
                 </div>
 
-                <div className="flex items-center justify-end gap-1 w-full text-2xl">
+                <div className="flex items-center justify-center gap-2 flex-1 text-xl">
                     <div className="relative group">
                         <div className="flex gap-1 text-sky-300">
                             <CloudRain /> {precipitation}
