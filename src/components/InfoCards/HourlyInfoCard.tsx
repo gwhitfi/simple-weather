@@ -7,7 +7,7 @@ import { getUVColor } from "../../utils/getUVColor";
 
 function HourlyInfoCard({ icon, temp, condition, time, day, precipitation, uv, wind }: any) {
     return (
-        <div className="flex flex-col bg-sky-800 text-white mb-2 rounded-3xl ">
+        <div className="flex flex-col bg-sky-800 text-white mb-2 p-2 rounded-3xl ">
             <div className="relative group">
                 <div className="text-center text-xl">{formatTime(time)}</div>
                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 bg-black text-white text-xs rounded px-2 py-1 hidden group-hover:block whitespace-nowrap">
