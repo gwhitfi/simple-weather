@@ -59,6 +59,9 @@ function App() {
             <h1>weather made simple.</h1>
             <AddressSearchBox onAddressSelect={setSelectedAddress} />
             <SetDefault isDefault={isDefault} onCheck={setIsDefault} />
+            {selectedAddress && (!currentWeather || !dailyWeather || !hourlyWeather) && (
+                <div className="w-8 h-8 border-4 border-blue-300 border-t-blue-600 rounded-full animate-spin" />
+            )}
             {selectedAddress && currentWeather && dailyWeather && hourlyWeather && (
                 <div className="sm:flex sm:gap-5 sm:items-start">
                     <div className="sm:flex sm:flex-col sm:gap-5 ">
